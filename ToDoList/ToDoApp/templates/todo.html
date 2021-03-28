@@ -1,0 +1,45 @@
+<style>
+    .split{
+        height: 100%;
+        width: 50%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+    .left{
+        left:0%;
+        background-color: #fc766aff;
+
+    }
+    .right{
+        right:0;
+        background-color: #5b84b1ff;
+    }
+
+
+
+</style>
+
+
+<div class="split right">
+    <h1 align="center" style="color: rgb(238, 65, 49); font-size: 155px;">To Do List</h1>
+</div>
+<div class="split left">
+    <ol>
+        {% for item in items %}
+            <li style="color: rgb(1,87,179);font-size: 55px;">{{item.text}}
+                <form action = "/delete/{{item.id}}/" style = 'display: inline;' method= "post">{% csrf_token %}
+                    <input type = "submit" value = "Delete"/>
+                
+                </form>
+            </li>
+        {% endfor %}
+    </ol>
+
+    <form action = "/add/" method="post">{% csrf_token %}
+        <input style="color: rgb(1,87,179);font-size: 50px;" type = "text" name = "content"/>
+        <input style="color: rgb(1,87,179);font-size: 50px;" type = "submit" value="add"/>
+    </form>
+</div>
